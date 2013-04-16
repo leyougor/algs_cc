@@ -1,2 +1,2 @@
-algs_cc
-=======
+algorithms of C++
+==========
