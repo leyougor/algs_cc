@@ -1,0 +1,19 @@
+def stoper() = {
+        if (b.length() > 0) {
+            //        println("@" + b + "@")
+            var stoper = """,.:;!?"'()[]@#$%^&*_+-=|<>\/~{}"""
+            var ch = b.charAt(0)
+            while (stoper.contains(ch) && b.length() > 1) {
+                b = b.substring(1);
+                ch = b.charAt(0)
+            }
+            ch = b.charAt(b.length() - 1)
+            while (stoper.contains(ch) && b.length() > 1) {
+                b = b.substring(0, b.length() - 1)
+                ch = b.charAt(b.length() - 1)
+            }
+
+            if (stoper.contains(ch) && b.length() <= 1)
+                b = ""
+        }
+    }

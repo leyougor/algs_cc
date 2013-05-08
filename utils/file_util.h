@@ -1,10 +1,3 @@
-//============================================================================
-// Name        : ring-queue.cpp
-// Author      : 
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C, Ansi-style
-//============================================================================
 #ifndef ALGS_FILE_UTIL_H_
 #define ALGS_FILE_UTIL_H_
 
@@ -25,35 +18,43 @@ public:
     {
     }
 
-    static pair<vector<int> , vector<int> > get_file_vecint_pair(const string& filename, const string& codefile)
+    static vector<int> get_text_codeword(const string& textfile, const string& codefile, vector<int> &slave)
     {
-        vector<string> vecstr = get_file_vecstr(filename, codefile);
+        vector<pair<int, int> > prv = get_text_codeword(textfile, codefile);
+        vector<int> master;
+        slave.clear();
+        for (int i = 0; i < (int) prv.size(); i++)
+        {
+            master.push_back(prv[i].first);
+            slave.push_back(prv[i].second);
+        }
+        return master;
+    }
+
+    static vector<pair<int, int> > get_text_codeword(const string& textfile, const string& codefile)
+    {
+        vector<string> vecstr = segment_textfile(textfile);
         map<string, pair<int, int> > mp = get_codeword_map(codefile);
-        vector<int> vec;
-        vector<int> vec2;
+        vector<pair<int, int> > prv;
         for (int i = 0; i < (int) vecstr.size(); i++)
         {
             //            TODO 单独符号已被忽略
             if (mp[vecstr[i]].first != 0)
-            {
-                vec.push_back(mp[vecstr[i]].first);
-                vec2.push_back(mp[vecstr[i]].second);
-                if (i < 20)
-                    cout << vecstr[i] << ":" //NL
-                            << mp[vecstr[i]].first << "," << mp[vecstr[i]].second << endl;
-            }
+                prv.push_back(mp[vecstr[i]]);
         }
-        return make_pair(vec, vec2);
+        return prv;
     }
-    static vector<string> get_file_vecstr(const string& filename, const string& codefile)
+
+    //    文本分词
+    static vector<string> segment_textfile(const string& textfile)
     {
         vector<string> vec;
         ifstream infile;
         string sline;
-        infile.open(filename.c_str());
+        infile.open(textfile.c_str());
         if (!infile)
         {
-            cout << "error:unable to open input file:" << filename << endl;
+            cout << "error:unable to open input file:" << textfile << endl;
             return vec;
         }
 
@@ -64,7 +65,6 @@ public:
                 vector<string> vecstr = StringUtil::split(sline);
                 //              忽略换行符
                 //                vecstr.push_back("\n");
-
                 CollectionUtil::merge_vector(vec, vecstr);
             }
         }
@@ -72,15 +72,15 @@ public:
     }
 
     //    获取词表
-    static map<string, pair<int, int> > get_codeword_map(const string& filename)
+    static map<string, pair<int, int> > get_codeword_map(const string& codefile)
     {
         map<string, pair<int, int> > mp;
         ifstream infile;
         string sline;
-        infile.open(filename.c_str());
+        infile.open(codefile.c_str());
         if (!infile)
         {
-            cout << "error:unable to open input file:" << filename << endl;
+            cout << "error:unable to open input file:" << codefile << endl;
             return mp;
         }
 
@@ -92,11 +92,7 @@ public:
                 int right = sline.find_last_of(",");
                 string word = sline.substr(0, left);
                 int first = atoi(sline.substr(left + 1, right - left - 1).c_str());
-                int second;
-                if (right == -1 or left >= right)
-                    second = 1;
-                else
-                    second = atoi(sline.substr(right + 1).c_str());
+                int second = (right == -1 or left >= right) ? 1 : atoi(sline.substr(right + 1).c_str());
                 mp.insert(make_pair(word, make_pair(first, second)));
             }
             //            content.append(sline.c_str()).append("\n");

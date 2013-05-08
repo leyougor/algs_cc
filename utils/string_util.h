@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ALGS_UTILS_STRING_UTIL_H_
+#define ALGS_UTILS_STRING_UTIL_H_
 
 #include <string>
 #include <iostream>
@@ -29,3 +30,5 @@ public:
     }
 };
 
+
+#endif

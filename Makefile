@@ -7,7 +7,7 @@ LIBS =
 TARGET =	hello_cc.exe
 
 $(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) -Wno-write-strings -o $(TARGET) $(OBJS) $(LIBS)
 
 all:	$(TARGET)
 
