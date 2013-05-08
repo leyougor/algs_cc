@@ -1,13 +1,13 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		main.cpp 
+OBJS =		main.cpp
 
 LIBS =
 
 TARGET =	main.exe
 
 $(TARGET):	$(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LIBS);./main.exe
 
 all:	$(TARGET)
 

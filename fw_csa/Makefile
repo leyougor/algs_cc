@@ -1,15 +1,7 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
+CC=g++
+CFLAGS=-O9 -DNDEBUG
 
-OBJS =		fw-csa.o
+all: main
+main:
+	$(CC) -g main.cpp -o main.exe -lsdsl -ldivsufsort -ldivsufsort64;./main.exe
 
-LIBS =
-
-TARGET =	fw-csa.exe
-
-$(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
-
-all:	$(TARGET)
-
-clean:
-	rm -f $(OBJS) $(TARGET)
