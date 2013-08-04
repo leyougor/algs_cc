@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : ring-queue.cpp
+// Name        : hello_cc.cpp
 // Author      : 
 // Version     :
 // Copyright   : Your copyright notice
@@ -12,7 +12,7 @@ using namespace std;
 
 int main(void)
 {
-    cout << "hello,worl!" << endl;
+    cout << "hello,world!" << endl;
     cout << "\nfinish!" << endl;
     return 0;
 }
