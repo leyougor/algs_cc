@@ -12,6 +12,12 @@ class CollectionUtil
 {
 public:
 
+    template<typename T>
+    static double get_size_in_mega_bytes(vector<T> v)
+    {
+        return sizeof(T) * v.size() / (1024.0 * 1024.0);
+    }
+
     template<typename K, typename V>
     static map<V, K> inverse_map(const map<K, V> &mp)
     {

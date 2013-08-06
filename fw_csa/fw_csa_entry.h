@@ -15,12 +15,12 @@ public:
     map<string, pair<int, int> > mp;
     map<string, int> stem_mp;
 
-    map<pair<int, int> , string> inv_mp;
+    map<pair<int, int>, string> inv_mp;
 
     CSA csa;
 public:
     CSAEntry(string textfile, string codefile) :
-        master(FileUtil::get_text_codeword(textfile, codefile, slave)), csa(master)
+            master(FileUtil::get_text_codeword(textfile, codefile, slave)), csa(master)
     {
         mp = FileUtil::get_codeword_map(codefile);
         map<string, pair<int, int> >::iterator it;
@@ -31,6 +31,22 @@ public:
         inv_mp = CollectionUtil::inverse_map(mp);
 
     }
+
+    void save(string textfile)
+    {
+        csa.save(textfile);
+    }
+
+    void load(string textfile)
+    {
+        csa.load(textfile);
+    }
+
+    double get_csa_size()
+    {
+        return csa.get_csa_size();
+    }
+
     int count(const string &str)
     {
         int code = stem_mp[str];

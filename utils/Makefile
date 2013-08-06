@@ -12,7 +12,7 @@ $(TARGET):	$(OBJS)
 all:	$(TARGET)
 
 test:
-	$(CXX) -o test_file.exe test_file.cpp
+	$(CXX) -o test_file.exe test_file.cpp -lsdsl -ldivsufsort -ldivsufsort64;./test_file.exe
 
 clean:
 	rm -f $(OBJS) $(TARGET)

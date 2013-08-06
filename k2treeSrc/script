@@ -1,0 +1,4 @@
+./build_tree /d2/fclaude/graph/eu/eu-2005 1 grafoeu5S18L1 4 2 5 18
+./build_tree /d2/fclaude/graph/indochina/indochina 1 grafoin5S20L1 4 2 5 20
+./build_tree /d2/fclaude/graph/uk/ukgraph 1 grafouk6S22L1 4 2 6 22
+./build_tree /d2/fclaude/graph/arabic/arabic 1 grafoarab6S22L1 4 2 6 22

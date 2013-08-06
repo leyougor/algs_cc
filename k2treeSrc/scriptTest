@@ -1,0 +1,5 @@
+./test_tree /d2/sladra/grafosweb/hibrVocSubm_b_opt/grafoeu5S18L2 /d2/fclaude/graph/eu/queries.bin
+./test_tree /d2/sladra/grafosweb/hibrVocSubm_b_opt/grafoin5S20L2 /d2/fclaude/graph/indochina/queries.bin
+./test_tree /d2/sladra/grafosweb/hibrVocSubm_b_opt/grafouk6S22L2 /d2/fclaude/graph/uk/queries.bin
+./test_tree /d2/sladra/grafosweb/hibrVocSubm_b_opt/grafoarab6S22L2 /d2/fclaude/graph/arabic/rpdiff/queries.bin
+

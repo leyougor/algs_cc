@@ -6,8 +6,10 @@
 #include <map>
 #include <algorithm>
 #include <sdsl/rrr_vector.hpp>
+#include <sdsl/util.hpp>
 #include "../utils/util.h"
 #include "../utils/collection_util.h"
+#include "../utils/file_util.h"
 
 using namespace std;
 using namespace sdsl;
@@ -32,6 +34,10 @@ public:
         this->bv = bv;
         this->sample = sample;
         this->dynamic = dynamic;
+    }
+
+    BitVector(){
+
     }
 
     //   close
@@ -91,7 +97,7 @@ public:
 
 public:
     CSA(const vector<int> &vec) :
-        sa(cal_sa(vec)), psi(sa2psi()), bt(cal_ds2(vec, sv))
+            sa(cal_sa(vec)), psi(sa2psi()), bt(cal_ds2(vec, sv))
     {
         //        初始化列表会按成员声明的顺序来构造成员
         //        sa = cal_sa(vec);
@@ -99,8 +105,33 @@ public:
         //        bv = cal_ds(vec, sv);
         //        bvv = cal_ds2(vec, sv);
         //        bt = ?;
-
         bvv = bt.bv;
+    }
+
+    CSA() {
+
+    }
+
+    double get_csa_size()
+    {
+        return CollectionUtil::get_size_in_mega_bytes(psi) + CollectionUtil::get_size_in_mega_bytes(sv)
+                + util::get_size_in_mega_bytes(bvv);
+    }
+
+    void load(const string filename)
+    {
+        FileUtil::load_from_file(psi, (filename + ".psi").c_str());
+        FileUtil::load_from_file(sv, (filename + ".sv").c_str());
+        util::load_from_file(bvv, (filename + ".bvv").c_str());
+        BitVector<> tv = bvv;
+        bt = tv;
+    }
+
+    void save(const string filename)
+    {
+        FileUtil::store_to_file(psi, (filename + ".psi").c_str());
+        FileUtil::store_to_file(sv, (filename + ".sv").c_str());
+        util::store_to_file(bvv, (filename + ".bvv").c_str());
     }
 
     vector<pair<int, int> > make_pair_vector(const vector<int> &vec)
@@ -125,7 +156,7 @@ public:
         if (iter != vec.end())
             vec.erase(iter, vec.end());
 
-        map<pair<int, int> , int> mp;
+        map<pair<int, int>, int> mp;
         for (int i = 0; i < vec.size(); i++)
             mp.insert(make_pair(vec[i], i));
 
@@ -154,7 +185,7 @@ public:
         vector<pair<int, int> > pv;
         pv = pair_vec;
         sort(pv.begin(), pv.end());
-        map<pair<int, int> , int> mp;
+        map<pair<int, int>, int> mp;
         for (int i = 0; i < pv.size(); i++)
             mp.insert(make_pair(pv[i], i));
 
@@ -347,7 +378,7 @@ public:
     {
         return extract(0, sa.size() - 1);
     }
-    //    前闭后闭
+//    前闭后闭
     vector<int> extract(int start, int end)
     {
         vector<int> text;

@@ -143,5 +143,34 @@ public:
         outfile.close();
     }
 
+    template<typename T>
+    static bool store_to_file(vector<T> v, const char* filename, bool add = false)
+    {
+        ofstream fout(filename, add ? ios::app : ios::out);
+        if (!fout)
+            return false;
+        copy(v.begin(), v.end(), ostream_iterator<T>(fout, "\n"));
+        fout.close();
+        return true;
+    }
+
+    static void load_from_file(vector<int> &v, const char* filename)
+    {
+        v.clear();
+        ifstream infile;
+        string sline;
+        infile.open(filename);
+        if (!infile)
+        {
+            cout << "error:unable to open input file:" << filename << endl;
+            return;
+        }
+        while (getline(infile, sline))
+        {
+            v.push_back(atoi(sline.c_str()));
+        }
+        infile.close();
+    }
+
 };
 #endif
