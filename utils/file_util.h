@@ -4,6 +4,7 @@
 #include<iostream>
 #include<fstream>
 #include<map>
+#include<iterator>
 #include <stdlib.h>
 #include "../utils/string_util.h"
 #include "../utils/collection_util.h"
